@@ -1,6 +1,6 @@
 package exercise.chapter1_1;
 
-import api.StdIn;
+import edu.princeton.cs.algs4.StdIn;
 
 public class Ex20 {
     public static void main(String[] args) {
