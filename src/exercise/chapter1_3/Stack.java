@@ -3,6 +3,7 @@ package exercise.chapter1_3;
 import edu.princeton.cs.algs4.StdIn;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.function.Consumer;
 
 /**
@@ -36,6 +37,11 @@ public class Stack<Item> implements Iterable<Item> {
         first = first.next;
         N--;
         return item;
+    }
+
+    public Item peek() {
+        if (isEmpty()) throw new NoSuchElementException("Stack Null");
+        return first.item;
     }
 
     @Override
