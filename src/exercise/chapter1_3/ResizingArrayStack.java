@@ -47,11 +47,11 @@ public class ResizingArrayStack<Item> implements Iterable<Item> {
 
     @Override
     public Iterator<Item> iterator() {
-        return new ReverseArrayIterator();
+        return new ResizingArrayIterator();
     }
 
 
-    private class ReverseArrayIterator implements Iterator<Item> {
+    private class ResizingArrayIterator implements Iterator<Item> {
         private int i = N;
 
         @Override
