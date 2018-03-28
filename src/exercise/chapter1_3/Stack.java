@@ -12,9 +12,17 @@ import java.util.function.Consumer;
  * @param <Item>
  */
 public class Stack<Item> implements Iterable<Item> {
-
     private Node first;
     private int N;
+
+    public Stack(Stack<Item> stack) {
+        first = new Node(stack.first);
+    }
+
+    public Stack() {
+        first = null;
+        N = 0;
+    }
 
     public boolean isEmpty() {
         return first == null;
@@ -52,6 +60,22 @@ public class Stack<Item> implements Iterable<Item> {
     private class Node {
         Item item;
         Node next;
+
+        Node() {
+        }
+
+        /**
+         * Ex42
+         *
+         * @param x
+         */
+        Node(Node x) {
+            item = x.item;
+            if (x.next != null) {
+                next = new Node(x.next);
+            }
+            N++;
+        }
     }
 
     private class StackIterator implements Iterator<Item> {

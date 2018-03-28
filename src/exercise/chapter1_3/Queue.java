@@ -10,6 +10,29 @@ public class Queue<Item> implements Iterable<Item> {
     private Node last;
     private int N;
 
+    public Queue() {
+    }
+
+    /**
+     * Ex41 - copy queue
+     *
+     * @param q
+     */
+    public Queue(Queue<Item> q) {
+        N = 0;
+        first = last = null;
+        Queue<Item> temp = new Queue<>();
+        while (!q.isEmpty()) {
+            Item item = q.dequeue();
+            temp.enqueue(item);
+        }
+        while (!temp.isEmpty()) {
+            Item item = temp.dequeue();
+            q.enqueue(item);
+            enqueue(item);
+        }
+    }
+
     public boolean isEmpty() {
         return first == null;
     }
@@ -39,6 +62,15 @@ public class Queue<Item> implements Iterable<Item> {
         }
         N--;
         return item;
+    }
+
+    public void printQueue() {
+        Node node = first;
+        while (node.next != null) {
+            System.out.print(node.item + " ");
+            node = node.next;
+        }
+        System.out.println();
     }
 
     @Override
@@ -85,5 +117,32 @@ class TestMode3 {
         }
         System.out.println();
         System.out.println("(" + s.size() + " left on stack");
+    }
+}
+
+/**
+ * Ex41
+ */
+class TestMode4 {
+    public static void main(String[] args) {
+        Queue<Character> t = new Queue<>();
+        String s = "hello world  ";
+        char[] c = s.toCharArray();
+        for (char chars : c) {
+            t.enqueue(chars);
+        }
+
+        t.printQueue();
+        System.out.println("==============");
+        Queue<Character> r = new Queue<>(t);
+        System.out.println();
+        r.printQueue();
+        t.printQueue();
+        System.out.println("===============");
+        r.dequeue();
+        r.printQueue();
+        t.printQueue();
+
+
     }
 }

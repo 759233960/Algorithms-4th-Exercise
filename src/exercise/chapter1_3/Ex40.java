@@ -1,11 +1,14 @@
 package exercise.chapter1_3;
 
-import edu.princeton.cs.algs4.StdIn;
-
 class MoveToFront<Item> {
     private Node first;
 
     private int N;
+
+    public MoveToFront() {
+        first = null;
+        N = 0;
+    }
 
     public void push(Item item) {
         Node temp = first;
@@ -59,21 +62,30 @@ class MoveToFront<Item> {
     }
 }
 
-public class Ex40_test {
+public class Ex40 {
     public static void main(String[] args) {
         MoveToFront<Character> move = new MoveToFront<>();
-        System.out.print("Please input String : ");
-        while (StdIn.hasNextChar()) {
-            move.push(StdIn.readChar());
-        }
-        System.out.println();
-        move.printValue();
+//        System.out.print("Please input String : ");
+//        while (StdIn.hasNextChar()) {
+//            move.push(StdIn.readChar());
+//        }
+//        System.out.println();
+//        move.printValue();
+//
+//        System.out.print("Please input char : ");
+//        while (StdIn.hasNextChar()) {
+//            move.read(StdIn.readChar());
+//        }
+//        System.out.println();
+//        move.printValue();
 
-        System.out.print("Please input char : ");
-        while (StdIn.hasNextChar()) {
-            move.read(StdIn.readChar());
+//        String s = " abcdsfsfsas";
+        char[] chars = new char[]{'a', 'b', 'c', 'd', 's', 'f', 's', 'f', 's', 'a', 's'};
+        for (char c : chars) {
+            move.push(c);
         }
-        System.out.println();
+        move.printValue();
+        move.read('s');
         move.printValue();
     }
 }
