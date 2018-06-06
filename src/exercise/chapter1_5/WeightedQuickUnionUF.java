@@ -3,6 +3,10 @@ package exercise.chapter1_5;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
+/**
+ * 一般而言，压缩路径的设计，已经是最优算法解。
+ * 实际应用时，主要注意如何实现树族。
+ */
 public class WeightedQuickUnionUF {
     private int[] id;
     private int[] sz;
