@@ -1,6 +1,10 @@
 package exercise.chapter2_1;
 
 import edu.princeton.cs.algs4.*;
+import edu.princeton.cs.algs4.Insertion;
+import edu.princeton.cs.algs4.Merge;
+import edu.princeton.cs.algs4.Selection;
+import edu.princeton.cs.algs4.Shell;
 import exercise.chapter1_4.Stopwatch;
 
 /**

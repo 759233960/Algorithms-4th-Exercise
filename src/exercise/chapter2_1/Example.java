@@ -1,16 +1,11 @@
 package exercise.chapter2_1;
 
-import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdOut;
 
 /**
  * Created by Yif on 6/9/2018.
  */
-public class Example {
-
-    public static void sort(Comparable[] a) {
-
-    }
+public abstract class Example {
 
     //v<w
     public static boolean less(Comparable v, Comparable w) {
@@ -40,10 +35,26 @@ public class Example {
         return true;
     }
 
-    public static void main(String[] args) {
-        String[] a = In.readStrings();
-        sort(a);
-        assert isSorted(a);
-        show(a);
+    /**
+     * 将a[lo...mid]和a[mid+1...hi]归并
+     */
+    public static void merge(Comparable[] a, int lo, int mid, int hi) {
+        int i = lo, j = mid + 1;
+
+        //复制a数组至aux中
+        Comparable[] aux = new Comparable[a.length];
+        for (int k = lo; k <= hi; k++) {
+            aux[k] = a[k];
+        }
+
+        //执行从lo到hi的归并
+        for (int k = lo; k <= hi; k++) {
+            if (i > mid) a[k] = aux[j++];
+            else if (j > hi) a[k] = aux[i++];
+            else if (less(aux[j], aux[i])) a[k] = aux[j++];
+            else a[k] = a[i++];
+        }
     }
+
+    public abstract void sort(Comparable[] a);
 }

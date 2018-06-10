@@ -3,8 +3,8 @@ package exercise.chapter2_1;
 /**
  * Created by Yif on 6/9/2018.
  */
-public class Selection {
-    public static void sort(Comparable[] a) {
+public class Selection extends Example {
+    public void sort(Comparable[] a) {
         int N = a.length;
         for (int i = 0; i < N; i++) {
             int min = i;
