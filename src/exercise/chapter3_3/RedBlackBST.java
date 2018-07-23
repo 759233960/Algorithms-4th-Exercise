@@ -9,6 +9,10 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
     private static final boolean BLACK = false;
     private Node root;
 
+    public RedBlackBST() {
+
+    }
+
     private int size(Node h) {
         if (h == null) return 0;
         return h.N;
@@ -19,7 +23,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
     }
 
     public boolean isEmpty() {
-        return size() == 0;
+        return root == null;
     }
 
     private boolean isRed(Node h) {
@@ -83,6 +87,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
     }
 
     public void deleteMin() {
+        if (isEmpty()) throw new NoSuchElementException();
         if (!isRed(root.left) && !isRed(root.right))
             root.color = RED;
         root = deleteMin(root);
@@ -108,6 +113,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
     }
 
     public void deleteMax() {
+        if (isEmpty()) throw new NoSuchElementException();
         if (!isRed(root.left) && !isRed(root.right))
             root.color = RED;
         root = deleteMax(root);
@@ -140,6 +146,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
     }
 
     public void delete(Key key) {
+        if (isEmpty()) throw new NoSuchElementException();
         if (!isRed(root.left) && !isRed(root.right))
             root.color = RED;
         root = delete(root, key);

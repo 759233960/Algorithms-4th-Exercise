@@ -23,6 +23,11 @@ public class SequentialSearchST<Key, Value> {
         return null;
     }
 
+    public boolean contains(Key key) {
+        if (key == null) throw new IllegalArgumentException();
+        return get(key) != null;
+    }
+
     public void delete(Key key) {
         if (key == null) {
             throw new IllegalArgumentException();
