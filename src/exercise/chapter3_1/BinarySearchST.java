@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
 public class BinarySearchST<Key extends Comparable<Key>, Value> {
     private Key[] keys;
     private Value[] values;
-    private int N;
+    private int size;
 
     public BinarySearchST(int capacity) {
         keys = (Key[]) new Comparable[capacity];
@@ -15,11 +15,11 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
     }
 
     public int size() {
-        return N;
+        return size;
     }
 
     public boolean isEmpty() {
-        return N == 0;
+        return size == 0;
     }
 
     public Value get(Key key) {
@@ -28,7 +28,7 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
         }
         if (isEmpty()) return null;
         int i = rank(key);
-        if (i < N && key.compareTo(keys[i]) == 0)
+        if (i < size && key.compareTo(keys[i]) == 0)
             return values[i];
         else
             return null;
@@ -36,7 +36,7 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
 
     public int rank(Key key) {
         if (key == null) throw new IllegalArgumentException();
-        int lo = 0, hi = N - 1;
+        int lo = 0, hi = size - 1;
         while (lo <= hi) {
             int mid = (lo + hi) / 2;
             int comp = key.compareTo(keys[mid]);
@@ -58,18 +58,18 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
             return;
         }
         int i = rank(key);
-        if (i < N && key.compareTo(keys[i]) == 0) {
+        if (i < size && key.compareTo(keys[i]) == 0) {
             keys[i] = key;
             values[i] = value;
             return;
         }
-        for (int j = N; j > i; j--) {
+        for (int j = size; j > i; j--) {
             keys[j] = keys[j - 1];
             values[j] = values[j - 1];
         }
         keys[i] = key;
         values[i] = value;
-        N++;
+        size++;
     }
 
     public void delete(Key key) {
@@ -80,15 +80,15 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
             return;
         }
         int i = rank(key);
-        if (i < N && key.compareTo(keys[i]) == 0) {
-            for (int j = i; j < N - 1; j++) {
+        if (i < size && key.compareTo(keys[i]) == 0) {
+            for (int j = i; j < size - 1; j++) {
                 keys[j] = keys[j + 1];
                 values[j] = values[j + 1];
             }
-            keys[N] = null;
-            values[N] = null;
-            N--;
-            if (N > 0 && N == keys.length / 4) {
+            keys[size] = null;
+            values[size] = null;
+            size--;
+            if (size > 0 && size == keys.length / 4) {
                 resize(keys.length / 2);
             }
         }
@@ -101,11 +101,11 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
 
     public Key max() {
         if (isEmpty()) throw new NoSuchElementException();
-        return keys[N - 1];
+        return keys[size - 1];
     }
 
     public Key select(int i) {
-        if (i >= N && i < 0) throw new NoSuchElementException();
+        if (i >= size && i < 0) throw new NoSuchElementException();
         return keys[i];
     }
 
@@ -114,7 +114,7 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
             throw new IllegalArgumentException();
         }
         int i = rank(key);
-        return i == N ? null : keys[i];
+        return i == size ? null : keys[i];
     }
 
     public Key floor(Key key) {
@@ -122,7 +122,7 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
             throw new IllegalArgumentException();
         }
         int i = rank(key);
-        if (i < N && key.compareTo(keys[i]) == 0) {
+        if (i < size && key.compareTo(keys[i]) == 0) {
             return keys[i];
         }
         return i == 0 ? null : keys[i - 1];
@@ -146,7 +146,7 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
     }
 
     public boolean contains(Key key) {
-        int lo = 0, hi = N;
+        int lo = 0, hi = size;
         while (lo <= hi) {
             int mid = (lo + hi) / 2;
             int comp = key.compareTo(keys[mid]);
@@ -162,11 +162,11 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
     }
 
     private void resize(int capacity) {
-        assert capacity >= N;
+        assert capacity >= size;
         Key[] tempK = (Key[]) (new Comparable[capacity]);
         Value[] tempV = (Value[]) new Object[capacity];
 
-        for (int i = 0; i < N; i++) {
+        for (int i = 0; i < size; i++) {
             tempK[i] = keys[i];
             tempV[i] = values[i];
         }

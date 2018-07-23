@@ -7,7 +7,7 @@ public class BST<Key extends Comparable<Key>, Value> {
 
     private int size(Node x) {
         if (x == null) return 0;
-        return x.N;
+        return x.size;
     }
 
     public int size() {
@@ -36,7 +36,7 @@ public class BST<Key extends Comparable<Key>, Value> {
         if (cmp < 0) x.left = put(x.left, key, value);
         else if (cmp > 0) x.right = put(x.right, key, value);
         else x.value = value;
-        x.N = size(x.left) + size(x.right) + 1;
+        x.size = size(x.left) + size(x.right) + 1;
         return x;
     }
 
@@ -121,7 +121,7 @@ public class BST<Key extends Comparable<Key>, Value> {
     private Node deleteMin(Node x) {
         if (x.left == null) return x.right;
         x.left = deleteMin(x.left);
-        x.N = size(x.left) + size(x.right) + 1;
+        x.size = size(x.left) + size(x.right) + 1;
         return x;
     }
 
@@ -132,7 +132,7 @@ public class BST<Key extends Comparable<Key>, Value> {
     private Node deleteMax(Node x) {
         if (x.right == null) return x.left;
         x.right = deleteMax(x.right);
-        x.N = size(x.left) + size(x.right) + 1;
+        x.size = size(x.left) + size(x.right) + 1;
         return x;
     }
 
@@ -153,7 +153,7 @@ public class BST<Key extends Comparable<Key>, Value> {
             x.left = t.left;
             x.right = delete(t.right, key);
         }
-        x.N = size(x.left) + size(x.right) + 1;
+        x.size = size(x.left) + size(x.right) + 1;
         return x;
     }
 
@@ -180,12 +180,12 @@ public class BST<Key extends Comparable<Key>, Value> {
         private Key key;
         private Value value;
         private Node left, right;
-        private int N;
+        private int size;
 
-        public Node(Key key, Value value, int N) {
+        public Node(Key key, Value value, int size) {
             this.key = key;
             this.value = value;
-            this.N = N;
+            this.size = size;
         }
     }
 

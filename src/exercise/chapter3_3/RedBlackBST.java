@@ -2,9 +2,10 @@ package exercise.chapter3_3;
 
 import exercise.chapter1_3.Queue;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class RedBlackBST<Key extends Comparable<Key>, Value> {
+public class RedBlackBST<Key extends Comparable<Key>, Value> implements Iterable<Key> {
     private static final boolean RED = true;
     private static final boolean BLACK = false;
     private Node root;
@@ -15,7 +16,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
 
     private int size(Node h) {
         if (h == null) return 0;
-        return h.N;
+        return h.size;
     }
 
     public int size() {
@@ -38,8 +39,8 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         x.left = h;
         x.color = h.color;
         h.color = RED;
-        x.N = h.N;
-        h.N = 1 + size(h.left) + size(h.right);
+        x.size = h.size;
+        h.size = 1 + size(h.left) + size(h.right);
         return x;
     }
 
@@ -50,8 +51,8 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         x.right = h;
         x.color = h.color;
         h.color = RED;
-        x.N = h.N;
-        h.N = 1 + size(h.left) + size(h.right);
+        x.size = h.size;
+        h.size = 1 + size(h.left) + size(h.right);
         return x;
     }
 
@@ -82,7 +83,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         if (isRed(h.left) && isRed(h.left.left)) h = rotateRight(h);
         if (isRed(h.left) && isRed(h.right)) h = flipColors(h);
 
-        h.N = size(h.left) + size(h.right) + 1;
+        h.size = size(h.left) + size(h.right) + 1;
         return h;
     }
 
@@ -146,6 +147,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
     }
 
     public void delete(Key key) {
+        if (key == null) throw new IllegalArgumentException();
         if (isEmpty()) throw new NoSuchElementException();
         if (!isRed(root.left) && !isRed(root.right))
             root.color = RED;
@@ -179,7 +181,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
     }
 
     private Value get(Node h, Key key) {
-        if (key == null) throw new NoSuchElementException();
+        if (key == null) throw new IllegalArgumentException();
         if (h == null) return null;
         int comp = key.compareTo(h.key);
         if (comp > 0) return get(h.right, key);
@@ -226,18 +228,63 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         if (comhi > 0) keys(x.right, queue, lo, hi);
     }
 
+    public boolean contains(Key key) {
+        return get(key) != null;
+    }
+
+    public Key ceiling(Key key) {
+        if (isEmpty()) throw new NoSuchElementException();
+        Node x = ceiling(root, key);
+        return x == null ? null : x.key;
+    }
+
+    private Node ceiling(Node h, Key key) {
+        if (key == null) throw new IllegalArgumentException();
+        if (h == null) return null;
+        int cmp = key.compareTo(h.key);
+        if (cmp > 0) return ceiling(h.right, key);
+        else if (cmp == 0) return h;
+        else {
+            Node t = ceiling(h.left, key);
+            return t != null ? t : h;
+        }
+    }
+
+    public Key floor(Key key) {
+        if (isEmpty()) throw new NoSuchElementException();
+        Node x = floor(root, key);
+        return x == null ? null : x.key;
+    }
+
+    private Node floor(Node h, Key key) {
+        if (key == null) throw new IllegalArgumentException();
+        if (h == null) return null;
+        int cmp = key.compareTo(h.key);
+        if (cmp < 0) return floor(h.left, key);
+        else if (cmp == 0) return h;
+        else {
+            Node t = floor(h.right, key);
+            return t != null ? t : h;
+        }
+    }
+
+    @Override
+    public Iterator<Key> iterator() {
+        return keys().iterator();
+    }
+
     private class Node {
         private Node left;
         private Node right;
         private boolean color = BLACK;
         private Key key;
         private Value value;
-        private int N;
+        private int size;
 
-        public Node(Key key, Value value, int N, boolean color) {
+        public Node(Key key, Value value, int size, boolean color) {
             this.key = key;
             this.value = value;
-            this.N = N;
+            this.size = size;
             this.color = color;
         }
     }

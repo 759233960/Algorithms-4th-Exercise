@@ -4,14 +4,14 @@ import exercise.chapter1_3.Queue;
 
 public class SequentialSearchST<Key, Value> {
     private Node first;
-    private int N;
+    private int size;
 
     public int size() {
-        return N;
+        return size;
     }
 
     public boolean isEmpty() {
-        return N == 0;
+        return size == 0;
     }
 
     public Value get(Key key) {
@@ -40,7 +40,7 @@ public class SequentialSearchST<Key, Value> {
             return null;
         }
         if (x.key.equals(key)) {
-            N--;
+            size--;
             return x.next;
         }
         x.next = delete(x.next, key);
@@ -58,7 +58,7 @@ public class SequentialSearchST<Key, Value> {
             }
         }
         first = new Node(key, value, first);
-        N++;
+        size++;
     }
 
     public Iterable<Key> keys() {

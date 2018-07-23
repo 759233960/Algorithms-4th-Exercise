@@ -38,13 +38,13 @@ public class SeparateChainingHashST<Key, Value> {
         if (value == null) {
             delete(key);
         } else {
-            if (!st[hash(key)].contains(key))
-                N++;
+            if (N >= 10 * M) resize(2 * M);
+            if (!st[hash(key)].contains(key)) N++;
             st[hash(key)].put(key, value);
         }
     }
 
-    public void resize(int chains) {
+    private void resize(int chains) {//not must be needed
         SeparateChainingHashST<Key, Value> temp = new SeparateChainingHashST(chains);
         for (int i = 0; i < M; i++) {
             Iterator<Key> iterator = st[i].keys().iterator();
@@ -74,6 +74,7 @@ public class SeparateChainingHashST<Key, Value> {
         if (st[hash(key)].contains(key))
             N--;
         st[hash(key)].delete(key);
+        if (M > 4 && N <= 2 * M) resize(M / 2);
     }
 
     public Iterable<Key> keys() {
