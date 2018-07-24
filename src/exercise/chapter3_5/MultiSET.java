@@ -99,7 +99,7 @@ public class MultiSET<Key extends Comparable<Key>> implements Iterable<Key> {
 
     public int count(Key key) {
         if (key == null) throw new IllegalArgumentException();
-        return set.get(key);
+        return set.get(key) == null ? 0 : set.get(key);
     }
 
     public boolean remove(@NotNull Key key) {
@@ -112,8 +112,7 @@ public class MultiSET<Key extends Comparable<Key>> implements Iterable<Key> {
 
     @Override
     public String toString() {
-        String s = set.toString();
-        return "{" + s.substring(1, s.length() - 1) + "}";
+        return "{" + set.keys().toString() + "}";
     }
 
     @Override
@@ -127,5 +126,37 @@ public class MultiSET<Key extends Comparable<Key>> implements Iterable<Key> {
 
     public Key floor(Key key) {
         return set.floor(key);
+    }
+}
+
+class UnitTest {
+    public static void main(String[] args) {
+        MultiSET<Integer> st = new MultiSET<>();
+        st.add(1);
+        st.add(2);
+        st.add(3);
+        st.add(14);
+        st.add(5);
+        st.add(6);
+        st.add(2);
+        st.add(3);
+
+        System.out.println("st = " + st.toString());
+        System.out.println("st size = " + st.size());
+        System.out.println("========================");
+
+        System.out.println("st.count(3)=" + st.count(3));
+        System.out.println("========================");
+
+        System.out.println("st delete 2");
+        st.remove(2);
+        System.out.println("st = " + st.toString());
+        System.out.println("st size = " + st.size());
+        System.out.println("========================");
+
+        System.out.println("st delete 14");
+        st.remove(14);
+        System.out.println("st = " + st.toString());
+        System.out.println("st size = " + st.size());
     }
 }

@@ -37,8 +37,8 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> implements Iterable
         Node x = h.right;
         h.right = x.left;
         x.left = h;
-        x.color = h.color;
-        h.color = RED;
+        x.color = x.left.color;
+        x.left.color = RED;
         x.size = h.size;
         h.size = 1 + size(h.left) + size(h.right);
         return x;
@@ -49,8 +49,8 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> implements Iterable
         Node x = h.left;
         h.left = x.right;
         x.right = h;
-        x.color = h.color;
-        h.color = RED;
+        x.color = x.right.color;
+        x.right.color = RED;
         x.size = h.size;
         h.size = 1 + size(h.left) + size(h.right);
         return x;
@@ -75,8 +75,8 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> implements Iterable
         if (h == null) return new Node(key, value, 1, RED);
 
         int comp = key.compareTo(h.key);
-        if (comp > 0) put(h.right, key, value);
-        else if (comp < 0) put(h.left, key, value);
+        if (comp > 0) h.right = put(h.right, key, value);
+        else if (comp < 0) h.left = put(h.left, key, value);
         else h.value = value;
 
         if (isRed(h.right) && !isRed(h.left)) h = rotateLeft(h);
@@ -143,6 +143,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> implements Iterable
         if (!isRed(h.left) && isRed(h.right)) h = rotateLeft(h);
         if (isRed(h.left) && isRed(h.left.left)) h = rotateRight(h);
         if (isRed(h.left) && isRed(h.right)) flipColors(h);
+        h.size = size(h.left) + size(h.right) + 1;
         return h;
     }
 
@@ -166,7 +167,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> implements Iterable
             if (key.compareTo(h.key) == 0 && h.right == null)
                 return null;
             if (!isRed(h.right) && !isRed(h.right.left))
-                h = rotateRight(h);
+                h = moveRedRight(h);
             if (key.compareTo(h.key) == 0) {
                 h.value = get(h.right, min(h.right).key);
                 h.key = min(h.right).key;
@@ -273,6 +274,21 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> implements Iterable
         return keys().iterator();
     }
 
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        s.append("key:");
+        s.append(keys().toString());
+        s.append('\n');
+        s.append("values:").append('[');
+        for (Key key : keys()) {
+            s.append("{").append(get(key).toString()).append("},");
+        }
+        s.deleteCharAt(s.length() - 1);
+        s.append(']');
+        return s.toString();
+    }
+
     private class Node {
         private Node left;
         private Node right;
@@ -289,5 +305,36 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> implements Iterable
         }
     }
 
+}
 
+class UnitTest {
+    public static void main(String[] args) {
+        RedBlackBST<Integer, String> st = new RedBlackBST<>();
+        st.put(1, "a");
+        st.put(2, "b");
+        st.put(3, "c");
+        st.put(14, "y");
+        st.put(5, "s");
+        st.put(6, "c");
+//        st.put(2, "e");
+//        st.put(3, "g");
+
+        System.out.println("st = " + st.toString());
+        System.out.println("st size = " + st.size());
+        System.out.println("========================");
+
+        System.out.println("st.get(3)=" + st.get(3).toString());
+        System.out.println("========================");
+
+        System.out.println("st delete 2");
+        st.delete(2);
+        System.out.println("st = " + st.toString());
+        System.out.println("st size = " + st.size());
+        System.out.println("========================");
+
+        System.out.println("st delete 14");
+        st.delete(14);
+        System.out.println("st = " + st.toString());
+        System.out.println("st size = " + st.size());
+    }
 }
