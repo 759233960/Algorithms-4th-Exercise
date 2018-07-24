@@ -2,12 +2,14 @@ package exercise.chapter1_3;
 
 import edu.princeton.cs.algs4.StdIn;
 
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class Queue<Item> implements Iterable<Item> {
 
-    private Node first;
-    private Node last;
+    private Node<Item> first;
+    private Node<Item> last;
     private int N;
 
     public Queue() {
@@ -42,10 +44,10 @@ public class Queue<Item> implements Iterable<Item> {
     }
 
     public void enqueue(Item item) {
-        Node oldLast = last;
-        last = new Node();
-        last.next = null;
+        Node<Item> oldLast = last;
+        last = new Node<Item>();
         last.item = item;
+        last.next = null;
         if (isEmpty()) {
             first = last;
         } else {
@@ -55,22 +57,56 @@ public class Queue<Item> implements Iterable<Item> {
     }
 
     public Item dequeue() {
+        if (isEmpty()) throw new NoSuchElementException();
         Item item = first.item;
         first = first.next;
-        if (isEmpty()) {
-            last = null;
-        }
         N--;
+        if (isEmpty()) last = null;
         return item;
     }
 
     public void printQueue() {
         Node node = first;
-        while (node.next != null) {
-            System.out.print(node.item + " ");
+        while (node != null) {
+            System.out.print(node.item);
             node = node.next;
         }
         System.out.println();
+    }
+
+    public Item[] toArrays() {
+        Item[] items = (Item[]) new Object[N];
+        Node<Item> x = first;
+        int i = 0;
+        for (Item item : this) {
+            items[i] = item;
+            i++;
+        }
+
+//        while (x!= null) {
+//            items[i] = x.item;
+//            x = x.next;
+//            i++;
+//        }
+
+//        for (int i = 0; i < N; i++) {
+//            items[i] = x.item;
+//            if (x.next == null)
+//                return items;
+//            x = x.next;
+//        }
+        return items;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        for (Item item : this) {
+            s.append(item);
+            s.append(' ');
+        }
+        s.deleteCharAt(s.length() - 1);
+        return s.toString();
     }
 
     @Override
@@ -78,13 +114,13 @@ public class Queue<Item> implements Iterable<Item> {
         return new QueueIterator();
     }
 
-    private class Node {
+    private class Node<Item> {
         Item item;
-        Node next;
+        Node<Item> next;
     }
 
     private class QueueIterator implements Iterator<Item> {
-        private Node current = first;
+        private Node<Item> current = first;
 
         @Override
         public boolean hasNext() {
@@ -126,14 +162,16 @@ class TestMode3 {
 class TestMode4 {
     public static void main(String[] args) {
         Queue<Character> t = new Queue<>();
-        String s = "hello world  ";
+        String s = "hello world";
         char[] c = s.toCharArray();
         for (char chars : c) {
             t.enqueue(chars);
         }
-
+        System.out.println("To Array:" + Arrays.toString(t.toArrays()));
+        System.out.println("To String:" + t.toString());
+        System.out.println("--------------");
         t.printQueue();
-        System.out.println("==============");
+        System.out.println("==============" + t.size());
         Queue<Character> r = new Queue<>(t);
         System.out.println();
         r.printQueue();
