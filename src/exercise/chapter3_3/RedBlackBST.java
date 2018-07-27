@@ -107,7 +107,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> implements Iterable
         flipColors(h);
 
         if (isRed(h.right.left)) {
-            h = rotateRight(h);
+            h.right = rotateRight(h.right);
             h = rotateLeft(h);
         }
         return h;
