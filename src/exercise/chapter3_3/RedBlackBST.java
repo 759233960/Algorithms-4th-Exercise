@@ -134,7 +134,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> implements Iterable
 
     private Node moveRedRight(Node h) {
         flipColors(h);
-        if (!isRed(root.left.left))
+        if (!isRed(h.left.left))
             h = rotateRight(h);
         return h;
     }
