@@ -10,8 +10,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> implements Iterable
     private static final boolean BLACK = false;
     private Node root;
 
-    public RedBlackBST() {
-
+    public RedBlackBST() {//constructor
     }
 
     private int size(Node h) {
