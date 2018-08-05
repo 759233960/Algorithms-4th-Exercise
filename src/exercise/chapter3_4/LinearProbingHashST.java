@@ -2,17 +2,17 @@ package exercise.chapter3_4;
 
 import java.util.NoSuchElementException;
 
-public class LinearProbingHastST<Key, Value> {
+public class LinearProbingHashST<Key, Value> {
     private int N;      //total number of item
     private int M;      //Size of map , M > N
     private Key[] keys;
     private Value[] values;
 
-    public LinearProbingHastST() {
+    public LinearProbingHashST() {
         this(16);
     }
 
-    public LinearProbingHastST(int cap) {
+    public LinearProbingHashST(int cap) {
         this.M = cap;
         this.N = 0;
         keys = (Key[]) new Object[M];
@@ -25,8 +25,8 @@ public class LinearProbingHastST<Key, Value> {
     }
 
     private void resize(int cap) {//must be needed
-        LinearProbingHastST<Key, Value> t;
-        t = new LinearProbingHastST<>(cap);
+        LinearProbingHashST<Key, Value> t;
+        t = new LinearProbingHashST<>(cap);
         for (int i = 0; i < M; i++)
             if (keys[i] != null)
                 t.put(keys[i], values[i]);

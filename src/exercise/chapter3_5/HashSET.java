@@ -1,14 +1,14 @@
 package exercise.chapter3_5;
 
 import com.sun.istack.internal.NotNull;
-import exercise.chapter3_4.LinearProbingHastST;
+import exercise.chapter3_4.LinearProbingHashST;
 
 public class HashSET<Key extends Comparable<Key>> {
     private static final Object ELEMENT = new Object();
-    private LinearProbingHastST<Key, Object> hashSET;
+    private LinearProbingHashST<Key, Object> hashSET;
 
     public HashSET() {
-        hashSET = new LinearProbingHastST<>();
+        hashSET = new LinearProbingHashST<>();
     }
 
     public int size() {
