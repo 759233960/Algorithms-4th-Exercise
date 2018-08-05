@@ -7,9 +7,9 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class SeparateChainingHashST<Key, Value> {
-    private int N;
-    private int M;
-    private SequentialSearchST<Key, Value>[] st;
+    private int N;//键值总对数
+    private int M;//散列表大小
+    private SequentialSearchST<Key, Value>[] st;//存放链表
 
     public SeparateChainingHashST() {
         this(997);
