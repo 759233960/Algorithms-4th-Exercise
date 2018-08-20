@@ -43,4 +43,13 @@ public class BreadthFirstPaths {
         path.push(s);
         return path;
     }
+
+    public int distTo(int v) {
+        //0~v distance
+        int dis = 0;
+        if (!hasPathTo(v)) return dis;
+        for (int x = v; x != s; x = edgeTo[x])
+            dis++;
+        return dis;
+    }
 }

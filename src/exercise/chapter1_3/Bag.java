@@ -35,6 +35,10 @@ public class Bag<Item> implements Iterable<Item> {
         return false;
     }
 
+    public boolean isEmpty() {
+        return first == null;
+    }
+
     private class Node {
         Node next;
         Item item;

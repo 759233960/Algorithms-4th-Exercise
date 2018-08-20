@@ -28,6 +28,25 @@ public class Graph {
         }
     }
 
+    public static void main(String[] args) {
+        Graph graph = new Graph(13);
+        graph.addEdge(9, 10);
+        graph.addEdge(9, 11);
+        graph.addEdge(12, 11);
+        graph.addEdge(9, 12);
+        System.out.println(graph);
+        System.out.println("-----------------");
+        System.out.println("has 10-11:" + graph.hasEdge(10, 11));
+        System.out.println("has 11-10:" + graph.hasEdge(11, 10));
+        System.out.println("has 10-9:" + graph.hasEdge(10, 9));
+        System.out.println("has 9-11:" + graph.hasEdge(9, 10));
+        System.out.println("has 12-10:" + graph.hasEdge(12, 10));
+        System.out.println("-----------------");
+        System.out.println("clone:");
+
+        System.out.println(graph.clone());
+    }
+
     public int V() {
         return V;
     }
@@ -37,7 +56,9 @@ public class Graph {
     }
 
     public void addEdge(int v, int w) {
+        if (v > V || v < 0 || w > V || w < 0) throw new IllegalArgumentException();
         if (v == w) throw new IllegalArgumentException("Don't allow self-loop!");
+        if (adj[v].contains(w) || adj[w].contains(v)) throw new IllegalArgumentException("Don't allow parallel-edge!");
         adj[v].add(w);
         adj[w].add(v);
         E++;
@@ -53,22 +74,30 @@ public class Graph {
         return adj[v];
     }
 
-    protected Graph clone() {
+    public Graph clone() {
         Graph g = new Graph(V());
-        for (int i = 0; i < E; i++) {
-            int finalI = i;
-            adj[i].forEach(value -> g.addEdge(finalI, value));
-        }
+        // TODO: 8/21/2018 等待重写clone  有bug
+//        for (int i = 0; i < V; i++) {
+//            for (Integer value : adj[i]) {
+//                if (!hasEdge(i, value))
+//                    g.addEdge(i, value);
+//            }
+//        }
         return g;
     }
 
     @Override
     public String toString() {
-        StringBuffer s = new StringBuffer();
-        for (int i = 0; i < E; i++) {
-            adj[i].forEach(value -> s.append(" ").append(value));
+        StringBuilder s = new StringBuilder();
+        for (int i = 0; i < V; i++) {
+            s.append(i).append(":");
+            for (Object o : adj[i]) {
+                s.append(" ").append(o);
+            }
             s.append("\n");
         }
         return s.toString();
     }
 }
+
+
