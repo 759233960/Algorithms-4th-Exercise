@@ -37,9 +37,16 @@ public class Graph {
     }
 
     public void addEdge(int v, int w) {
+        if (v == w) throw new IllegalArgumentException("Don't allow self-loop!");
         adj[v].add(w);
         adj[w].add(v);
         E++;
+    }
+
+    public boolean hasEdge(int v, int w) {
+        if (V() < 2) return false;
+        if (v < 0 || v > V()) return false;
+        return adj[v].contains(w);
     }
 
     public Iterable<Integer> adj(int v) {

@@ -25,6 +25,16 @@ public class Bag<Item> implements Iterable<Item> {
         return s.toString();
     }
 
+    public boolean contains(Item item) {
+        Node temp = first;
+        while (temp != null) {
+            if (temp.item.equals(item))
+                return true;
+            temp = temp.next;
+        }
+        return false;
+    }
+
     private class Node {
         Node next;
         Item item;
@@ -55,5 +65,9 @@ class UnitTest {
             bag.add(i);
 
         System.out.println(bag);
+
+
+        System.out.println("contains 2:" + bag.contains(2));
+        System.out.println("contains 15:" + bag.contains(15));
     }
 }
