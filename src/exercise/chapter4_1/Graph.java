@@ -45,4 +45,23 @@ public class Graph {
     public Iterable<Integer> adj(int v) {
         return adj[v];
     }
+
+    protected Graph clone() {
+        Graph g = new Graph(V());
+        for (int i = 0; i < E; i++) {
+            int finalI = i;
+            adj[i].forEach(value -> g.addEdge(finalI, value));
+        }
+        return g;
+    }
+
+    @Override
+    public String toString() {
+        StringBuffer s = new StringBuffer();
+        for (int i = 0; i < E; i++) {
+            adj[i].forEach(value -> s.append(" ").append(value));
+            s.append("\n");
+        }
+        return s.toString();
+    }
 }

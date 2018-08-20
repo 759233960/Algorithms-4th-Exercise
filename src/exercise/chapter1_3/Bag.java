@@ -18,6 +18,13 @@ public class Bag<Item> implements Iterable<Item> {
         return new BagIterator();
     }
 
+    @Override
+    public String toString() {
+        StringBuffer s = new StringBuffer();
+        forEach(val -> s.append(val).append(" "));
+        return s.toString();
+    }
+
     private class Node {
         Node next;
         Item item;
@@ -37,5 +44,16 @@ public class Bag<Item> implements Iterable<Item> {
             current = current.next;
             return item;
         }
+    }
+}
+
+class UnitTest {
+    public static void main(String[] args) {
+        Bag<Integer> bag = new Bag<>();
+
+        for (int i = 0; i < 10; i++)
+            bag.add(i);
+
+        System.out.println(bag);
     }
 }
