@@ -86,6 +86,16 @@ public class ex876 {
         return curr;
     }
 
+    public ListNode middleNode2(ListNode head) {
+        ListNode curr = head;
+        ListNode fast = head;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            curr = curr.next;
+        }
+        return curr;
+    }
+
     public class ListNode {
         int val;
         ListNode next;
