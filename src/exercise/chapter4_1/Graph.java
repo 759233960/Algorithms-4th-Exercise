@@ -28,6 +28,27 @@ public class Graph {
         }
     }
 
+    public Graph(String stream) {
+        In in = new In(stream);
+        this.V = in.readInt();
+        this.E = 0;
+        adj = (Bag<Integer>[]) new Bag[V];
+        for (int v = 0; v < V; v++) {
+            adj[v] = new Bag<>();
+        }
+        int E = in.readInt();
+        for (int i = 0; i < E; i++) {
+            if (!in.hasNextChar()) return;
+            String[] s = in.readLine().trim().split(" ");
+            for (int j = 0; j < s.length; j++) {
+                int value = Integer.valueOf(s[j]);
+                if (hasEdge(i, value))
+                    addEdge(i, value);
+            }
+        }
+    }
+
+
     public static void main(String[] args) {
         Graph graph = new Graph(13);
         graph.addEdge(9, 10);
