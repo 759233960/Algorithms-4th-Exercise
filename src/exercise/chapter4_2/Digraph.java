@@ -1,5 +1,6 @@
 package exercise.chapter4_2;
 
+import edu.princeton.cs.algs4.In;
 import exercise.chapter1_3.Bag;
 
 public class Digraph {
@@ -13,6 +14,16 @@ public class Digraph {
         adj = (Bag<Integer>[]) new Bag[V];
         for (int v = 0; v < V; v++)
             adj[v] = new Bag<>();
+    }
+
+    public Digraph(In in) {
+        this(in.readInt());
+        int E = in.readInt();
+        for (int i = 0; i < E; i++) {
+            int v = in.readInt();
+            int w = in.readInt();
+            addEdge(v, w);
+        }
     }
 
     public int V() {
