@@ -76,13 +76,12 @@ public class Graph {
 
     public Graph clone() {
         Graph g = new Graph(V());
-        // TODO: 8/21/2018 等待重写clone  有bug
-//        for (int i = 0; i < V; i++) {
-//            for (Integer value : adj[i]) {
-//                if (!hasEdge(i, value))
-//                    g.addEdge(i, value);
-//            }
-//        }
+        for (int i = 0; i < V; i++) {
+            for (Integer value : adj[i]) {
+                if (!g.hasEdge(i, value))
+                    g.addEdge(i, value);
+            }
+        }
         return g;
     }
 
