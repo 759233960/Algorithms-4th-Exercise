@@ -1,6 +1,7 @@
 package exercise.chapter4_2;
 
 import exercise.chapter1_3.Queue;
+import exercise.chapter1_3.Stack;
 
 public class BreadthFirstDirectedPaths {
     private boolean[] marked;   //vertex marked
@@ -65,5 +66,14 @@ public class BreadthFirstDirectedPaths {
 
     public int distTo(int v) {
         return distTo[v];
+    }
+
+    public Iterable<Integer> pathTo(int s, int v) {
+        if (!hasPathTo(v)) return null;
+        Stack<Integer> path = new Stack<>();
+        for (int x = v; x != s; x = edgeTo[x])
+            path.push(x);
+        path.push(s);
+        return path;
     }
 }
