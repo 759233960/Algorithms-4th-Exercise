@@ -12,19 +12,24 @@ package LeetCodeExcercise;
 public class ex203 {
 
     public ListNode removeElements(ListNode head, int val) {
+        while (head != null && head.val == val) {
+            head = head.next;
+        }
         ListNode curr = head;
-        if (curr.val == val) {
-            curr = curr.next;
-        }
-        ListNode temp = head;
-        while (curr != null) {
-            if (curr.val == val) {
+        while (curr != null && curr.next != null) {
+            if (curr.next.val == val) {
+                curr.next = curr.next.next;
             } else {
-                temp.next = curr;
+                curr = curr.next;
             }
-            curr = curr.next;
         }
-        return temp;
+        return head;
+    }
+
+    public ListNode removeElements2(ListNode head, int val) {
+        if (head == null) return null;
+        head.next = removeElements2(head.next, val);
+        return head.val == val ? head.next : head;
     }
 
     class ListNode {
