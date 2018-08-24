@@ -96,7 +96,7 @@ public class ex876 {
         return curr;
     }
 
-    public class ListNode {
+    class ListNode {
         int val;
         ListNode next;
 
