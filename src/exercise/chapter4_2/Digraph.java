@@ -26,31 +26,6 @@ public class Digraph {
         }
     }
 
-    public int V() {
-        return V;
-    }
-
-    public int E() {
-        return E;
-    }
-
-    public void addEdge(int v, int w) {
-        adj[v].add(w);
-        E++;
-    }
-
-    public Iterable<Integer> adj(int v) {
-        return adj[v];
-    }
-
-    public Digraph reverse() {
-        Digraph R = new Digraph(V);
-        for (int v = 0; v < V; v++)
-            for (int w : adj[v])
-                R.addEdge(w, v);
-        return R;
-    }
-
     public static void main(String[] args) {
         Digraph graph = new Digraph(13);
         graph.addEdge(9, 10);
@@ -68,6 +43,33 @@ public class Digraph {
         System.out.println("clone:");
 
         System.out.println(graph.clone());
+    }
+
+    public int V() {
+        return V;
+    }
+
+    public int E() {
+        return E;
+    }
+
+    public void addEdge(int v, int w) {
+        if (hasEdge(v, w)) throw new IllegalArgumentException("Not support parallel edge");
+        if (v == w) throw new IllegalArgumentException("Not support self-loop");
+        adj[v].add(w);
+        E++;
+    }
+
+    public Iterable<Integer> adj(int v) {
+        return adj[v];
+    }
+
+    public Digraph reverse() {
+        Digraph R = new Digraph(V);
+        for (int v = 0; v < V; v++)
+            for (int w : adj[v])
+                R.addEdge(w, v);
+        return R;
     }
 
     public boolean hasEdge(int v, int w) {
