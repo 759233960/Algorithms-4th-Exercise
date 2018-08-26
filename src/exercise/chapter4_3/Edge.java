@@ -35,4 +35,20 @@ public class Edge implements Comparable<Edge> {
     public String toString() {
         return String.format("v:%d - w:%d, weight:%.2f", v, w, weight);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Edge) {
+            int v = either();
+            int w = other(v);
+            Edge edge = (Edge) obj;
+            try {
+                if ((edge.either() == v && edge.other(v) == w) || (edge.either() == w && edge.other(w) == v))
+                    return compareTo(edge) == 0;
+            } catch (RuntimeException e) {
+                e.printStackTrace();
+            }
+        }
+        return super.equals(obj);
+    }
 }
