@@ -19,7 +19,7 @@ public class MessageQueue implements IMessageQueue {
     }
 
     @Override
-    public void enqueueMessage(Message message) throws InterruptedException {
+    public void enqueueMessage(Message message) {
         queue.push(message);
     }
 }
