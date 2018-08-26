@@ -51,11 +51,47 @@ public class Digraph {
         return R;
     }
 
+    public static void main(String[] args) {
+        Digraph graph = new Digraph(13);
+        graph.addEdge(9, 10);
+        graph.addEdge(9, 11);
+        graph.addEdge(12, 11);
+        graph.addEdge(9, 12);
+        System.out.println(graph);
+        System.out.println("-----------------");
+        System.out.println("has 10-11:" + graph.hasEdge(10, 11));
+        System.out.println("has 11-10:" + graph.hasEdge(11, 10));
+        System.out.println("has 10-9:" + graph.hasEdge(10, 9));
+        System.out.println("has 9-11:" + graph.hasEdge(9, 10));
+        System.out.println("has 12-10:" + graph.hasEdge(12, 10));
+        System.out.println("-----------------");
+        System.out.println("clone:");
+
+        System.out.println(graph.clone());
+    }
+
+    public boolean hasEdge(int v, int w) {
+        if (V() < 2) return false;
+        if (v < 0 || v > V()) return false;
+        return adj[v].contains(w);
+    }
+
+    public Digraph clone() {
+        Digraph graph = new Digraph(V());
+        for (int i = 0; i < graph.V(); i++) {
+            for (int s : adj[i]) {
+                if (!graph.hasEdge(i, s))
+                    graph.addEdge(i, s);
+            }
+        }
+        return graph;
+    }
+
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
         s.append(V).append(" Vertex ;").append(E).append(" Edge");
-        for (int v = 0; v < E; v++) {
+        for (int v = 0; v < V; v++) {
             s.append("\n").append(v).append(":");
             for (int w : adj[v])
                 s.append(w).append(" ");
