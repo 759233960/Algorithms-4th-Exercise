@@ -1,15 +1,13 @@
 package LeetCodeExcercise;
 
-import java.util.List;
-
 /**
  * 160. 相交链表
  * 编写一个程序，找到两个单链表相交的起始节点。
  * 例如，下面的两个链表：
  * A:          a1 → a2
- * ↘
- * c1 → c2 → c3
- * ↗
+ *                      ↘
+ *                          c1 → c2 → c3
+ *                      ↗
  * B:     b1 → b2 → b3
  * 在节点 c1 开始相交。
  * <p>
