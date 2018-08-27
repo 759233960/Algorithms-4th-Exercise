@@ -3,6 +3,11 @@ package exercise.chapter4_3;
 import edu.princeton.cs.algs4.IndexMinPQ;
 import edu.princeton.cs.algs4.Queue;
 
+/**
+ * 性能：
+ * 空间   V
+ * 时间   ElogV
+ */
 public class PrimMST {
     private Edge[] edgeTo;          //距离树最近的边
     private double[] distTo;        //distTo[w]=edgTo[w].weight()

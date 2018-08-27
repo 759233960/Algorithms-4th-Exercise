@@ -3,6 +3,11 @@ package exercise.chapter4_3;
 import edu.princeton.cs.algs4.MinPQ;
 import exercise.chapter1_3.Queue;
 
+/**
+ * 性能：
+ * 空间   E
+ * 时间   ElogE
+ */
 public class LazyPrimMST {
     private boolean[] marked;   //最小生成树的顶点
     private Queue<Edge> mst;    //最小生成树的边
