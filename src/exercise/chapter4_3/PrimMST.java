@@ -14,7 +14,7 @@ public class PrimMST {
     private boolean[] marked;       //如果v在树中，则为true
     private IndexMinPQ<Double> pq;  //有效的横切边
 
-    public PrimMST(EdgeWeightGraph G) {
+    public PrimMST(EdgeWeightedGraph G) {
         edgeTo = new Edge[G.V()];
         distTo = new double[G.V()];
         marked = new boolean[G.V()];
@@ -28,7 +28,7 @@ public class PrimMST {
             visit(G, pq.delMin());
     }
 
-    private void visit(EdgeWeightGraph G, int v) {
+    private void visit(EdgeWeightedGraph G, int v) {
         //将顶点v添加到树中，并更新数据
         marked[v] = true;
         for (Edge e : G.adj(v)) {

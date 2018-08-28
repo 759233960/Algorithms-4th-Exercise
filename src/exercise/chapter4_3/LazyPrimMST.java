@@ -13,7 +13,7 @@ public class LazyPrimMST {
     private Queue<Edge> mst;    //最小生成树的边
     private MinPQ<Edge> pq;     //横切边（包括失效的边）,MinPQ为优先队列
 
-    public LazyPrimMST(EdgeWeightGraph G) {
+    public LazyPrimMST(EdgeWeightedGraph G) {
         pq = new MinPQ<>();
         marked = new boolean[G.V()];
         mst = new Queue<>();
@@ -30,7 +30,7 @@ public class LazyPrimMST {
     }
 
 
-    private void visit(EdgeWeightGraph G, int v) {
+    private void visit(EdgeWeightedGraph G, int v) {
         //标记顶点v并将所有连接v和未被标记的边加入pq
         marked[v] = true;
         for (Edge e : G.adj(v))

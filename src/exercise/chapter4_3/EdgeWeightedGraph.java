@@ -3,12 +3,12 @@ package exercise.chapter4_3;
 import edu.princeton.cs.algs4.In;
 import exercise.chapter1_3.Bag;
 
-public class EdgeWeightGraph {
+public class EdgeWeightedGraph {
     private final int V;
     private int E;
     private Bag<Edge>[] adj;
 
-    public EdgeWeightGraph(int V) {
+    public EdgeWeightedGraph(int V) {
         this.V = V;
         this.E = 0;
         adj = (Bag<Edge>[]) new Bag[V];
@@ -16,7 +16,7 @@ public class EdgeWeightGraph {
             adj[v] = new Bag<>();
     }
 
-    public EdgeWeightGraph(In in) {
+    public EdgeWeightedGraph(In in) {
         this(in.readInt());
         int E = in.readInt();
         for (int i = 0; i < E; i++) {
@@ -28,7 +28,7 @@ public class EdgeWeightGraph {
     }
 
     public static void main(String[] args) {
-        EdgeWeightGraph graph = new EdgeWeightGraph(13);
+        EdgeWeightedGraph graph = new EdgeWeightedGraph(13);
         graph.addEdge(new Edge(9, 10, 0.1));
         graph.addEdge(new Edge(9, 11, 0.3));
         graph.addEdge(new Edge(9, 12, 0.4));
