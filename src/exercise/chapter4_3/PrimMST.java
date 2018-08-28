@@ -11,7 +11,7 @@ import edu.princeton.cs.algs4.Queue;
 public class PrimMST {
     private Edge[] edgeTo;          //距离树最近的边
     private double[] distTo;        //distTo[w]=edgTo[w].weight()
-    private boolean[] marked;       //如果v在树中，则为true
+    private boolean[] marked;       //如果v在树中，则为true。可以去除，用disTo[]是否等于Double.POSITIVE_INFINITY来判断
     private IndexMinPQ<Double> pq;  //有效的横切边
 
     public PrimMST(EdgeWeightedGraph G) {
