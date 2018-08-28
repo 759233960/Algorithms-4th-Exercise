@@ -3,6 +3,8 @@ package exercise.chapter4_4;
 import edu.princeton.cs.algs4.IndexMinPQ;
 import edu.princeton.cs.algs4.Stack;
 
+import java.util.NoSuchElementException;
+
 /**
  * 相当于Prim算法的即时实现版本：PrimMST.java
  * 参照Prim算法，稍作变种即可实现延迟版
@@ -28,6 +30,7 @@ public class DijkstraSP {
     }
 
     private void relax(EdgeWeightedDigraph G, int v) {
+        if (v < 0 || v > disTo.length) throw new NoSuchElementException("vertex is illegal!");
         for (DirectedEdge edge : G.adj(v)) {
             int w = edge.to();
             if (disTo[w] > disTo[v] + edge.weight()) {
@@ -40,10 +43,12 @@ public class DijkstraSP {
     }
 
     public double disTo(int v) {
+        if (v < 0 || v > disTo.length) throw new IllegalArgumentException("vertex is illegal!");
         return disTo[v];
     }
 
     public boolean hasPathTo(int v) {
+        if (v < 0 || v > disTo.length) return false;
         return disTo[v] < Double.POSITIVE_INFINITY;
     }
 
