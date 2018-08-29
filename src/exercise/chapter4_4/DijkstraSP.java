@@ -6,6 +6,7 @@ import edu.princeton.cs.algs4.Stack;
 import java.util.NoSuchElementException;
 
 /**
+ * 可以处理环,可以求最小环
  * 相当于Prim算法的即时实现版本：PrimMST.java
  * 参照Prim算法，稍作变种即可实现延迟版
  * 性能：
