@@ -22,17 +22,12 @@ public class ex160 {
         //A + B = B + A;
         //(a+intersection)+(b+intersection)=(b+intersection)+(a+intersection)
         //遍历A+B 和 B+A，若相交,则最后必然会有相交点。
-        ListNode tempA = headA;
-        ListNode tempB = headB;
-        while (tempA != tempB) {
-            if (tempA == null)
-                tempA = headB;
-            else tempA = tempA.next;
-            if (tempB == null)
-                tempB = headA;
-            else tempB = tempB.next;
+        ListNode p = headA, q = headB;
+        while (p != q) {
+            p = p != null ? p.next : headB;
+            q = q != null ? q.next : headA;
         }
-        return tempA;
+        return p;
     }
 
 
