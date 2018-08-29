@@ -1,19 +1,12 @@
-package exercise.chapter4_4;
+package code_review.chapter4_4;
 
+import code_review.chapter4_3.EdgeWeightedGraph;
 import edu.princeton.cs.algs4.In;
-import exercise.chapter1_3.Bag;
 
-public class EdgeWeightedDigraph {
-    private final int V;                //顶点
-    private int E;                      //边
-    private Bag<DirectedEdge>[] adj;    //邻接表
+public class EdgeWeightedDigraph extends EdgeWeightedGraph<DirectedEdge> {
 
     public EdgeWeightedDigraph(int V) {
-        this.V = V;
-        E = 0;
-        adj = (Bag<DirectedEdge>[]) new Bag[V];
-        for (int v = 0; v < V; v++)
-            adj[v] = new Bag<>();
+        super(V);
     }
 
     public EdgeWeightedDigraph(In in) {
@@ -32,38 +25,22 @@ public class EdgeWeightedDigraph {
         System.out.println(graph);
         System.out.println("-----------------");
         System.out.println("has 10->11 0.02:" + graph.hasEdge(new DirectedEdge(10, 11, 0.02)));
+        //TODO:
         System.out.println("has 11->10 0.02:" + graph.hasEdge(new DirectedEdge(11, 10, 0.02)));
+
         System.out.println("has 10->9 0.1:" + graph.hasEdge(new DirectedEdge(10, 9, 0.1)));
         System.out.println("has 9->10 0.1:" + graph.hasEdge(new DirectedEdge(9, 10, 0.1)));
         System.out.println("has 12->10 0.4:" + graph.hasEdge(new DirectedEdge(12, 10, 0.4)));
         System.out.println("-----------------");
     }
 
-    public int V() {
-        return V;
-    }
-
-    public int E() {
-        return E;
-    }
-
+    @Override
     public void addEdge(DirectedEdge edge) {
         adj[edge.from()].add(edge);
         E++;
     }
 
-    public Iterable<DirectedEdge> adj(int v) {
-        return adj[v];
-    }
-
-    public Iterable<DirectedEdge> edges() {
-        Bag<DirectedEdge> bag = new Bag<>();
-        for (int v = 0; v < V; v++)
-            for (DirectedEdge edge : adj[v])
-                bag.add(edge);
-        return bag;
-    }
-
+    @Override
     public boolean hasEdge(DirectedEdge edge) {
         if (V() < 2) return false;
         if (edge.from() < 0 || edge.to() > V()) return false;
