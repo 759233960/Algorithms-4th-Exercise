@@ -57,14 +57,14 @@ public class ex817 {
     }
 
     public int numComponents2(ListNode head, int[] G) {
-        Set<Integer> set = new HashSet<>();
-        for (int g : G) set.add(g);
+        Set<Integer> g = new HashSet<>();
+        for (int i : G) g.add(i);
         int nums = 0;
         while (head != null) {
-            if (set.contains(head.val)) {
+            if (g.contains(head.val)) {
                 ++nums;
                 ListNode next = head.next;
-                while (next != null && set.contains(next.val)) {
+                while (next != null && g.contains(next.val)) {
                     next = next.next;
                 }
                 head = next;
