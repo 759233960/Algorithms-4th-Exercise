@@ -5,6 +5,14 @@ import exercise.chapter4_4.EdgeWeightedDirectedCycle;
 
 import java.util.Iterator;
 
+/**
+ * 性能：
+ * 时间：E+V
+ * <p>
+ * 总共用深度优先搜索遍历两遍顶点和边：
+ * 第一遍是检查是否有环
+ * 第二遍生成顶点的逆后序排列——拓扑排序
+ */
 public class Topological {
     private Iterable<Integer> order;        //顶点的拓扑排序,为所有顶点的逆后序排列。
 

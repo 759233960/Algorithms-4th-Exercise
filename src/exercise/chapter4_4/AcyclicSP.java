@@ -6,6 +6,11 @@ import exercise.chapter4_2.Topological;
 /**
  * 无环加权有向图最短路径算法
  * 使用拓扑排序组成的加权有向图结构进行计算, relax
+ * <p>
+ * 性能：
+ * 时间：E+V，线性
+ * <p>
+ * 由于Topological性能是 E+V，并且按照拓扑结构进行对每个顶点进行relax，不会重复遍历顶点
  */
 public class AcyclicSP {
     private DirectedEdge[] edgeTo;
