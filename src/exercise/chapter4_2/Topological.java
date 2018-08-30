@@ -1,5 +1,8 @@
 package exercise.chapter4_2;
 
+import exercise.chapter4_4.EdgeWeightedDigraph;
+import exercise.chapter4_4.EdgeWeightedDirectedCycle;
+
 import java.util.Iterator;
 
 public class Topological {
@@ -8,6 +11,22 @@ public class Topological {
     public Topological(Digraph G) {
         DirectedCycle cycleFinder = new DirectedCycle(G);
         if (!cycleFinder.hasCycle()) {
+            DepthFirstOrder dfs = new DepthFirstOrder(G);
+            order = dfs.reversePost();
+        }
+    }
+
+    public Topological(EdgeWeightedDigraph G) {
+        EdgeWeightedDirectedCycle find = new EdgeWeightedDirectedCycle(G);
+        if (!find.hasCycle()) {
+            DepthFirstOrder dfs = new DepthFirstOrder(G);
+            order = dfs.reversePost();
+        }
+    }
+
+    public Topological(EdgeWeightedDigraph G, int s) {
+        EdgeWeightedDirectedCycle find = new EdgeWeightedDirectedCycle(G, s);
+        if (!find.hasCycle()) {
             DepthFirstOrder dfs = new DepthFirstOrder(G);
             order = dfs.reversePost();
         }
