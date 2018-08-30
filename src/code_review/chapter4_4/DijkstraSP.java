@@ -31,7 +31,7 @@ public class DijkstraSP {
     }
 
     private void relax(EdgeWeightedDigraph G, int v) {
-        if (v < 0 || v > disTo.length) throw new NoSuchElementException("vertex is illegal!");
+        if (v < 0 || v >= disTo.length) throw new NoSuchElementException("vertex is illegal!");
         for (DirectedEdge edge : G.adj(v)) {
             int w = edge.to();
             if (disTo[w] > disTo[v] + edge.weight()) {
@@ -44,12 +44,12 @@ public class DijkstraSP {
     }
 
     public double disTo(int v) {
-        if (v < 0 || v > disTo.length) throw new IllegalArgumentException("vertex is illegal!");
+        if (v < 0 || v >= disTo.length) throw new IllegalArgumentException("vertex is illegal!");
         return disTo[v];
     }
 
     public boolean hasPathTo(int v) {
-        if (v < 0 || v > disTo.length) return false;
+        if (v < 0 || v >= disTo.length) return false;
         return disTo[v] < Double.POSITIVE_INFINITY;
     }
 

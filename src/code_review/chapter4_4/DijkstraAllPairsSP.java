@@ -15,7 +15,7 @@ public class DijkstraAllPairsSP {
     }
 
     public Iterable<DirectedEdge> path(int v, int w) {
-        if (v < 0 || v > all.length) throw new IllegalArgumentException("vertex is illegal!");
+        if (v < 0 || v >= all.length) throw new IllegalArgumentException("vertex is illegal!");
         return all[v].pathTo(w);
     }
 

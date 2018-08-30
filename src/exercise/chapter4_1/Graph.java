@@ -87,7 +87,7 @@ public class Graph {
 
     public boolean hasEdge(int v, int w) {
         if (V() < 2) return false;
-        if (v < 0 || v > V()) return false;
+        if (v < 0 || v >= V()) return false;
         return adj[v].contains(w);
     }
 
