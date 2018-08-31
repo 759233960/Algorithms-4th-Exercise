@@ -18,6 +18,7 @@ import exercise.chapter1_3.Stack;
  */
 public class ex445 {
 
+    //不反转链表通过Stack存储数据并弹出，然后模仿Stack在头部添加新结点
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         Stack<Integer> stack1 = new Stack<>();
         Stack<Integer> stack2 = new Stack<>();
@@ -49,6 +50,7 @@ public class ex445 {
         return first;
     }
 
+    //反转链表
     public ListNode addTwoNumbers2(ListNode l1, ListNode l2) {
         ListNode rl1 = reverse(l1);
         ListNode rl2 = reverse(l2);
