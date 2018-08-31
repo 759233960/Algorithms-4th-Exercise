@@ -21,6 +21,6 @@ public class DijkstraAllPairsSP {
 
     public double dist(int s, int t) {
         if (s < 0 || s > all.length) throw new IllegalArgumentException("vertex is illegal!");
-        return all[s].disTo(t);
+        return all[s].distTo(t);
     }
 }

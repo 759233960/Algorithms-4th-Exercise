@@ -2,6 +2,10 @@ package exercise.chapter4_4;
 
 import edu.princeton.cs.algs4.StdIn;
 
+/**
+ * 性能：
+ * 时间：线性级别
+ */
 public class CPM {
     public static void main(String[] args) {
         int N = StdIn.readInt();

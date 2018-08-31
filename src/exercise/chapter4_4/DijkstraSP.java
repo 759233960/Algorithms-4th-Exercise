@@ -15,42 +15,42 @@ import java.util.NoSuchElementException;
  */
 public class DijkstraSP {
     private DirectedEdge[] edgeTo;
-    private double[] disTo;
+    private double[] distTo;
     private IndexMinPQ<Double> pq;
 
     public DijkstraSP(EdgeWeightedDigraph G, int s) {
         edgeTo = new DirectedEdge[G.V()];
-        disTo = new double[G.V()];
+        distTo = new double[G.V()];
         pq = new IndexMinPQ<>(G.V());
         for (int v = 0; v < G.V(); v++)
-            disTo[v] = Double.POSITIVE_INFINITY;
-        disTo[s] = 0.0;
-        pq.insert(s, disTo[s]);
+            distTo[v] = Double.POSITIVE_INFINITY;
+        distTo[s] = 0.0;
+        pq.insert(s, distTo[s]);
         while (!pq.isEmpty())
             relax(G, pq.delMin());
     }
 
     private void relax(EdgeWeightedDigraph G, int v) {
-        if (v < 0 || v >= disTo.length) throw new NoSuchElementException("vertex is illegal!");
+        if (v < 0 || v >= distTo.length) throw new NoSuchElementException("vertex is illegal!");
         for (DirectedEdge edge : G.adj(v)) {
             int w = edge.to();
-            if (disTo[w] > disTo[v] + edge.weight()) {
-                disTo[w] = disTo[v] + edge.weight();
+            if (distTo[w] > distTo[v] + edge.weight()) {
+                distTo[w] = distTo[v] + edge.weight();
                 edgeTo[w] = edge;
-                if (pq.contains(w)) pq.changeKey(w, disTo[w]);
-                else pq.insert(w, disTo[w]);
+                if (pq.contains(w)) pq.changeKey(w, distTo[w]);
+                else pq.insert(w, distTo[w]);
             }
         }
     }
 
-    public double disTo(int v) {
-        if (v < 0 || v >= disTo.length) throw new IllegalArgumentException("vertex is illegal!");
-        return disTo[v];
+    public double distTo(int v) {
+        if (v < 0 || v >= distTo.length) throw new IllegalArgumentException("vertex is illegal!");
+        return distTo[v];
     }
 
     public boolean hasPathTo(int v) {
-        if (v < 0 || v >= disTo.length) return false;
-        return disTo[v] < Double.POSITIVE_INFINITY;
+        if (v < 0 || v >= distTo.length) return false;
+        return distTo[v] < Double.POSITIVE_INFINITY;
     }
 
     public Iterable<DirectedEdge> pathTo(int v) {

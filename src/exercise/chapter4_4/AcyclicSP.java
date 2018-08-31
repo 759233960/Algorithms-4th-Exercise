@@ -22,14 +22,14 @@ import exercise.chapter4_2.Topological;
  */
 public class AcyclicSP {
     private DirectedEdge[] edgeTo;
-    private double[] disTo;
+    private double[] distTo;
 
     public AcyclicSP(EdgeWeightedDigraph G, int s) {
         edgeTo = new DirectedEdge[G.V()];
-        disTo = new double[G.V()];
+        distTo = new double[G.V()];
         for (int v = 0; v < G.V(); v++)
-            disTo[v] = Double.POSITIVE_INFINITY;
-        disTo[s] = 0.0;
+            distTo[v] = Double.POSITIVE_INFINITY;
+        distTo[s] = 0.0;
 
         Topological top = new Topological(G);
         for (int v : top.order())
@@ -39,8 +39,8 @@ public class AcyclicSP {
     private void relax(EdgeWeightedDigraph G, int v) {
         for (DirectedEdge edge : G.adj(v)) {
             int w = edge.to();
-            if (disTo[w] > disTo[v] + edge.weight()) {
-                disTo[w] = disTo[v] + edge.weight();
+            if (distTo[w] > distTo[v] + edge.weight()) {
+                distTo[w] = distTo[v] + edge.weight();
                 edgeTo[w] = edge;
             }
         }
@@ -48,12 +48,12 @@ public class AcyclicSP {
 
     public double distTo(int v) {
         checkVertex(v);
-        return disTo[v];
+        return distTo[v];
     }
 
     public boolean hasPathTo(int v) {
         checkVertex(v);
-        return disTo[v] != Double.POSITIVE_INFINITY;
+        return distTo[v] != Double.POSITIVE_INFINITY;
     }
 
     public Iterable<DirectedEdge> pathTo(int v) {
@@ -66,7 +66,7 @@ public class AcyclicSP {
     }
 
     private void checkVertex(int v) {
-        if (v < 0 || v >= disTo.length)
+        if (v < 0 || v >= distTo.length)
             throw new IllegalArgumentException("illegal vertex!!!");
     }
 }
