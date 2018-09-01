@@ -1,7 +1,7 @@
 package LeetCodeExcercise;
 
 /**
- * 725. 分隔链表
+ * 725. 分隔链表 Split Linked List in Parts
  * 给定一个头结点为 root 的链表, 编写一个函数以将链表分隔为 k 个连续的部分。
  * <p>
  * 每部分的长度应该尽可能的相等: 任意两部分的长度差距不能超过 1，也就是说可能有些部分为 null。
