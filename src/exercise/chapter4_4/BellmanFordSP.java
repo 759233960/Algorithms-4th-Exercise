@@ -4,9 +4,12 @@ import exercise.chapter1_3.Queue;
 import exercise.chapter1_3.Stack;
 
 /**
+ * 一般加权有向图的最短路径
+ * 可以处理权重为负的边
  * 性能：
  * 空间：V
  * 时间：EV
+ * 放松E条边，重复V轮
  */
 public class BellmanFordSP {
     private double[] distTo;                //从起点到某个顶点的路径长度
@@ -49,12 +52,18 @@ public class BellmanFordSP {
     }
 
     private void findNegativeCycle() {
-
+        int V = edgeTo.length;
+        EdgeWeightedDigraph spt;
+        spt = new EdgeWeightedDigraph(V);
+        for (DirectedEdge edge : edgeTo)
+            if (edge != null)
+                spt.addEdge(edge);
+        EdgeWeightedDirectedCycle finder = new EdgeWeightedDirectedCycle(spt);
+        cycle = finder.cycle();
     }
 
     private boolean hasNegativeCycle() {
-        //TODO:
-        return false;
+        return cycle != null;
     }
 
     public double distTo(int v) {
