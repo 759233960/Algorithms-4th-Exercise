@@ -51,7 +51,7 @@ public class BellmanFordSP {
         }
     }
 
-    private void findNegativeCycle() {
+    public void findNegativeCycle() {
         int V = edgeTo.length;
         EdgeWeightedDigraph spt;
         spt = new EdgeWeightedDigraph(V);
@@ -62,7 +62,11 @@ public class BellmanFordSP {
         cycle = finder.cycle();
     }
 
-    private boolean hasNegativeCycle() {
+    public Iterable<DirectedEdge> negativeCycle() {
+        return cycle;
+    }
+
+    public boolean hasNegativeCycle() {
         return cycle != null;
     }
 
