@@ -1,8 +1,8 @@
 package exercise.chapter4_3;
 
 import edu.princeton.cs.algs4.MinPQ;
-import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 import exercise.chapter1_3.Queue;
+import exercise.chapter1_5.WeightedQuickUnionUF;
 
 /**
  * 性能：

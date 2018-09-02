@@ -6,13 +6,15 @@ import edu.princeton.cs.algs4.StdOut;
 /**
  * 一般而言，压缩路径的设计，已经是最优算法解。
  * 实际应用时，主要注意如何实现树族。
+ * 树的高度：最差情况下 logN
+ * 性能：最差情况下 logN
  */
 public class WeightedQuickUnionUF {
     private int[] id;
     private int[] sz;
     private int count;
 
-    private WeightedQuickUnionUF(int N) {
+    public WeightedQuickUnionUF(int N) {
         count = N;
         id = new int[N];
         for (int i = 0; i < N; i++) {
@@ -42,7 +44,7 @@ public class WeightedQuickUnionUF {
         return count;
     }
 
-    private boolean connected(int p, int q) {
+    public boolean connected(int p, int q) {
         return find(p) == find(q);
     }
 
@@ -51,7 +53,7 @@ public class WeightedQuickUnionUF {
         return p;
     }
 
-    private void union(int p, int q) {
+    public void union(int p, int q) {
         int pRoot = find(p);
         int qRoot = find(q);
         if (pRoot == qRoot) {
