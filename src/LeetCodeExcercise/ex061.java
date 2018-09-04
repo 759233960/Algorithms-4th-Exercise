@@ -31,7 +31,6 @@ public class ex061 {
             curr = curr.next;
         }
         curr.next = head;
-        curr = curr.next;
         sum = sum - k % sum;
         for (int i = 0; i < sum; i++)
             curr = curr.next;
