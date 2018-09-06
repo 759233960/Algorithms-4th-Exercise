@@ -33,7 +33,7 @@ public class ex704 {
         }
         int mid;
         while (nums[lo] < nums[hi]) {
-            mid = (lo + hi) / 2;
+            mid = (lo + hi) >>> 2;
             if (lo == mid || hi == mid) {
                 if (target == nums[lo]) return lo;
                 else if (target == nums[hi]) return hi;
