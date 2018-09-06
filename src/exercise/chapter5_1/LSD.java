@@ -2,6 +2,10 @@ package exercise.chapter5_1;
 
 /**
  * 低位优先的字符串排序
+ * 性能：线性
+ * <p>
+ * 若是访问N组W个键的元素排序，则需要7WN+3WR次访问数组，与N+R成正比的额外空间。
+ * 总体运行时间与输入规模成正比。
  */
 public class LSD {
     public static void sort(String[] a, int W) {
