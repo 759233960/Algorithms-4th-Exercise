@@ -29,4 +29,6 @@ public class ex278 {
         }
         return lo;
     }
+
+    private boolean isBadVersion(int i){return false;}
 }
