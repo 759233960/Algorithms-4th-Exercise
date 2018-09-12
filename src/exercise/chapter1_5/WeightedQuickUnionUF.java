@@ -4,10 +4,10 @@ import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
 /**
- * 一般而言，压缩路径的设计，已经是最优算法解。
  * 实际应用时，主要注意如何实现树族。
  * 树的高度：最差情况下 logN
  * 性能：最差情况下 logN
+ * 一般而言，压缩路径的设计，已经是最优算法解。压缩路径接近O(1)
  */
 public class WeightedQuickUnionUF {
     private int[] id;
@@ -49,7 +49,14 @@ public class WeightedQuickUnionUF {
     }
 
     private int find(int p) {
+        int child = p;
         while (p != id[p]) p = id[p];
+        //在find时将分支中所有通往根节点路径上的子结点直接连接到根节点，尽可能的压缩树的高度。
+        while (id[child] != p) {
+            int temp = child;
+            child = id[child];
+            id[temp] = p;
+        }
         return p;
     }
 
