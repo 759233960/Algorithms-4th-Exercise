@@ -20,18 +20,6 @@ package LeetCodeExcercise;
  * 由于返回类型是整数，小数部分将被舍去。
  */
 public class ex069 {
-
-    public int mySqrt2(int x) {
-        if (x == 0) return 0;
-        double last = 0;
-        double res = 1;
-        while (last != res) {
-            last = res;
-            res = (res + x / res) / 2;
-        }
-        return (int) res;
-    }
-
     public int mySqrt(int x) {
         if (x <= 1) return x;
         //right = x
@@ -42,5 +30,17 @@ public class ex069 {
             else right = mid;
         }
         return right - 1;
+    }
+
+    //牛顿逼近法
+    public int mySqrt2(int x) {
+        if (x == 0) return 0;
+        double last = 0;
+        double res = 1;
+        while (last != res) {
+            last = res;
+            res = (res + x / res) / 2;
+        }
+        return (int) res;
     }
 }
