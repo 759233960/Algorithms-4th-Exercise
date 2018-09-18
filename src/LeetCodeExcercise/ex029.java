@@ -28,7 +28,7 @@ public class ex029 {
             return Integer.MAX_VALUE;
         long m = Math.abs(dividend), n = Math.abs(divisor), res = 0;
         int sign = (dividend < 0) ^ (divisor < 0) ? -1 : 1;
-        if (n == 1) return (int) (sign > 0 ? m : --m);
+        if (n == 1) return (int) (sign > 0 ? m : -m);
         while (m >= n) {
             long t = n, p = 1;
             while (m >= (t << 1)) {
