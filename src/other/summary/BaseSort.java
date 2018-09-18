@@ -24,9 +24,9 @@ class SelectionSort extends BaseSort {
 
     @Override
     public void sort(Comparable[] a) {
-        for (int i = 1; i < a.length; i++) {
+        for (int i = 0; i < a.length; i++) {
             int min = i;
-            for (int j = i; j < a.length; j++)
+            for (int j = i + 1; j < a.length; j++)
                 if (less(a[j], a[min])) min = j;
             exchange(a, i, min);
         }
