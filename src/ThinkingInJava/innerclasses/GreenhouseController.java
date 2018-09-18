@@ -15,7 +15,7 @@ public class GreenhouseController {
                 gc.new ThermostatDay(1400),
         };
         gc.addEvent(gc.new Restart(2000, eventList));
-        gc.addEvent(new GreenhouseControls.Terminate(300000));
+        gc.addEvent(new GreenhouseControls.Terminate(3000000));
         gc.run();
     }
 }
