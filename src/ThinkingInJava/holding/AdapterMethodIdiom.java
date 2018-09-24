@@ -1,4 +1,4 @@
-package ThinkingInJava.container;
+package ThinkingInJava.holding;
 
 import org.jetbrains.annotations.NotNull;
 
