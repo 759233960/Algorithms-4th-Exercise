@@ -101,3 +101,55 @@ class MergeBUSort extends MergeSort {
                 merge(a, lo, lo + sz - 1, Math.min(lo + sz + sz - 1, a.length - 1));
     }
 }
+
+class QuickSort extends BaseSort {
+
+    @Override
+    public void sort(Comparable[] a) {
+        sort(a, 0, a.length - 1);
+    }
+
+    private void sort(Comparable[] a, int lo, int hi) {
+        if (lo >= hi) return;
+        int j = partition(a, lo, hi);
+        sort(a, lo, j - 1);
+        sort(a, lo, j + 1);
+    }
+
+    private int partition(Comparable[] a, int lo, int hi) {
+        int i = lo, j = hi + 1;
+        Comparable v = a[lo];
+        while (true) {
+            while (less(a[++i], v)) if (i == hi) break;
+            while (less(v, a[--j])) {
+                // if (j == lo) break; 可忽略此检查
+            }
+            if (i >= j) break;
+            exchange(a, i, j);
+        }
+        exchange(a, lo, j);
+        return j;
+    }
+}
+
+class QuickSort3Way extends BaseSort {
+
+    @Override
+    public void sort(Comparable[] a) {
+        sort(a, 0, a.length - 1);
+    }
+
+    private void sort(Comparable[] a, int lo, int hi) {
+        if (lo >= hi) return;
+        int lt = lo, i = lo + 1, gt = hi;
+        Comparable v = a[lo];
+        while (i <= gt) {
+            int cmp = a[i].compareTo(v);
+            if (cmp < 0) exchange(a, lt++, i++);
+            else if (cmp > 0) exchange(a, gt--, i);
+            else i++;
+        }
+        sort(a, lo, lt - 1);
+        sort(a, gt + 1, hi);
+    }
+}
