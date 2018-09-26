@@ -3,6 +3,11 @@ package exercise.chapter2_3;
 import edu.princeton.cs.algs4.StdRandom;
 import exercise.chapter2_1.Example;
 
+/**
+ * 性能：
+ * 一般情况（重复少且随机排列） NlogN
+ * 最差情况 (N^2)/2
+ */
 public class Quick extends Example {
     private static final int M = 10; // 5~15 ,小数组的大小
 

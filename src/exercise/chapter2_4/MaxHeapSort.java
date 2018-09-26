@@ -17,16 +17,15 @@ public class MaxHeapSort {//max 0 to min N
         while (k * 2 <= N) {
             int j = k * 2;
             if (less(a[j], a[j + 1])) j++;
-            if (less(a[j], a[k])) break;
+            if (!less(a[k], a[j])) break;
             exch(a, k, j);
             k = j;
         }
     }
 
     public static void swim(Comparable[] a, int k, int N) {
-        while (less(k / 2, k)) {
-            if (k / 2 <= 0) return;
-            exch(a, k / 2, k);
+        while (k > 1 && less(k / 2, k)) {
+            exch(a, k, k / 2);
             k = k / 2;
         }
     }

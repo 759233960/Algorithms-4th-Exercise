@@ -153,3 +153,34 @@ class QuickSort3Way extends BaseSort {
         sort(a, gt + 1, hi);
     }
 }
+
+class MaxHeapSort extends BaseSort {
+
+    @Override
+    public void sort(Comparable[] a) {
+        int N = a.length;
+        for (int k = N / 2; k >= 1; k--)
+            sink(a, k);
+        while (N > 1) {
+            exchange(a, 1, N--);
+            sink(a, 1);
+        }
+    }
+
+    private void sink(Comparable[] a, int k) {
+        while (k << 1 <= a.length) {
+            int j = k << 1;
+            if (less(a[j], a[j + 1])) j++;
+            if (!less(a[k], a[j])) break;
+            exchange(a, k, j);
+            k = j;
+        }
+    }
+
+    private void swim(Comparable[] a, int k) {
+        while (k > 1 && less(k / 2, k)) {
+            exchange(a, k, k / 2);
+            k /= 2;
+        }
+    }
+}
