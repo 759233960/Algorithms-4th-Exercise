@@ -2,11 +2,12 @@ package exercise.chapter2_4;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * 基于索引的优先队列
+ * 基于索引的优先队列，默认最小堆
  * <herf>https://www.cnblogs.com/nullzx/p/6624731.html</herf>
  */
 public class IndexMinPQ<Key extends Comparable<Key>> implements Iterable<Integer> {
@@ -15,6 +16,7 @@ public class IndexMinPQ<Key extends Comparable<Key>> implements Iterable<Integer
     private int[] qp;       //pq的逆序：qp[pq[i]] = pq[qp[i]] = i
     private int n;          //元素的数量
     private int maxN;
+    private Comparator<? super Key> comparator;
 
     public IndexMinPQ(int maxN) {
         this.maxN = maxN;
@@ -23,6 +25,11 @@ public class IndexMinPQ<Key extends Comparable<Key>> implements Iterable<Integer
         pq = new int[maxN + 1];
         qp = new int[maxN + 1];
         for (int i : qp) qp[i] = -1;
+    }
+
+    public IndexMinPQ(int maxN, Comparator<? super Key> comparator) {
+        this(maxN);
+        this.comparator = comparator;
     }
 
     public void insert(int k, Key key) {
@@ -101,7 +108,9 @@ public class IndexMinPQ<Key extends Comparable<Key>> implements Iterable<Integer
     }
 
     private boolean less(int i, int j) {
-        return keys[pq[i]].compareTo(keys[pq[j]]) < 0;
+        if (comparator == null)
+            return keys[pq[i]].compareTo(keys[pq[j]]) < 0;
+        else return comparator.compare(keys[pq[i]], keys[pq[j]]) < 0;
     }
 
     private void exchange(int i, int j) {
