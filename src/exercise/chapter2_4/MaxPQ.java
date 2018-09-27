@@ -21,6 +21,7 @@ public class MaxPQ<Key extends Comparable<Key>> {
     }
 
     public void insert(Key v) {
+        if (N == pq.length - 1) resize(pq.length * 2);
         pq[++N] = v;
         swim(N);
     }
@@ -30,6 +31,7 @@ public class MaxPQ<Key extends Comparable<Key>> {
         exch(1, N--);
         pq[N + 1] = null;
         sink(1);
+        if (N > 0 && N == (pq.length - 1) / 4) resize(pq.length / 2);
         return max;
     }
 
@@ -61,4 +63,11 @@ public class MaxPQ<Key extends Comparable<Key>> {
         return pq[i].compareTo(pq[j]) < 0;
     }
 
+    private void resize(int capacity) {
+        assert capacity > N;
+        Key[] temp = (Key[]) new Object[capacity];
+        for (int i = 1; i <= N; i++)
+            temp[i] = pq[i];
+        pq = temp;
+    }
 }
