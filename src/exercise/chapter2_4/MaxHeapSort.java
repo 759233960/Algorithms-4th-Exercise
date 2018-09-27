@@ -3,7 +3,7 @@ package exercise.chapter2_4;
 public class MaxHeapSort {//max 0 to min N
 
     public static void sort(Comparable[] a) {
-        int N = a.length;
+        int N = a.length - 1;
         for (int k = N / 2; k >= 1; k--) {
             sink(a, k, N);
         }
@@ -16,7 +16,7 @@ public class MaxHeapSort {//max 0 to min N
     public static void sink(Comparable[] a, int k, int N) {
         while (k * 2 <= N) {
             int j = k * 2;
-            if (less(a[j], a[j + 1])) j++;
+            if (j < N && less(a[j], a[j + 1])) j++;
             if (!less(a[k], a[j])) break;
             exch(a, k, j);
             k = j;
@@ -24,7 +24,7 @@ public class MaxHeapSort {//max 0 to min N
     }
 
     public static void swim(Comparable[] a, int k, int N) {
-        while (k > 1 && less(k / 2, k)) {
+        while (k > 1 && less(a[k / 2], a[k])) {
             exch(a, k, k / 2);
             k = k / 2;
         }

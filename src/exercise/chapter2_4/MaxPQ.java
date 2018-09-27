@@ -2,6 +2,7 @@ package exercise.chapter2_4;
 
 /**
  * 优先队列，使用 “二叉堆” 弹出最大值。
+ * 0位不存值
  */
 public class MaxPQ<Key extends Comparable<Key>> {
     private Key[] pq;
@@ -20,7 +21,7 @@ public class MaxPQ<Key extends Comparable<Key>> {
     }
 
     public void insert(Key v) {
-        pq[N++] = v;
+        pq[++N] = v;
         swim(N);
     }
 
@@ -33,7 +34,7 @@ public class MaxPQ<Key extends Comparable<Key>> {
     }
 
     private void swim(int k) {
-        while (less(k / 2, k)) {
+        while (k > 1 && less(k / 2, k)) {
             exch(k / 2, k);
             k = k / 2;
         }
@@ -44,7 +45,7 @@ public class MaxPQ<Key extends Comparable<Key>> {
             int j = 2 * k;
             if (less(j, j + 1))
                 j++;
-            if (less(j, k)) break;
+            if (j < N && less(j, k)) break;
             exch(k, j);
             k = j;
         }

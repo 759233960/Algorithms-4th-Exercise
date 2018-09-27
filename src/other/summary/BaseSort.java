@@ -158,7 +158,7 @@ class MaxHeapSort extends BaseSort {
 
     @Override
     public void sort(Comparable[] a) {
-        int N = a.length;
+        int N = a.length - 1;
         for (int k = N / 2; k >= 1; k--)
             sink(a, k);
         while (N > 1) {
@@ -168,7 +168,7 @@ class MaxHeapSort extends BaseSort {
     }
 
     private void sink(Comparable[] a, int k) {
-        while (k << 1 <= a.length) {
+        while (k << 1 <= a.length - 1) {
             int j = k << 1;
             if (less(a[j], a[j + 1])) j++;
             if (!less(a[k], a[j])) break;
