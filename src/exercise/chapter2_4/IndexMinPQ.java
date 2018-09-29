@@ -24,7 +24,7 @@ public class IndexMinPQ<Key extends Comparable<Key>> implements Iterable<Integer
         keys = (Key[]) new Object[maxN + 1];
         pq = new int[maxN + 1];
         qp = new int[maxN + 1];
-        for (int i : qp) qp[i] = -1;
+        for (int i = 0; i < qp.length; i++) qp[i] = -1;
     }
 
     public IndexMinPQ(int maxN, Comparator<? super Key> comparator) {
