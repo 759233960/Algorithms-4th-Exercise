@@ -10,7 +10,7 @@ class Product {
 
         @Override
         public Product nextItem() {
-            return new Product(rand.nextInt(1000), "Test",
+            return new Product(rand.nextInt(1000), "CovariantArrays",
                     Math.round(rand.nextDouble() * 1000) + 0.99);
         }
     };
