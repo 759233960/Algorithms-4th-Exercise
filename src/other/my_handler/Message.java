@@ -5,23 +5,31 @@ package other.my_handler;
  */
 public class Message {
     Handler target;
-    private int code;
+    Runnable callBack;
+    Message next;
+    private int what;
     private String msg;
+
+    public Message(int what, String msg, Runnable callBack) {
+        this.what = what;
+        this.msg = msg;
+        this.callBack = callBack;
+    }
 
     public Message() {
     }
 
-    public Message(int code, String msg) {
-        this.code = code;
+    public Message(int what, String msg) {
+        this.what = what;
         this.msg = msg;
     }
 
-    public int getCode() {
-        return code;
+    public int getWhat() {
+        return what;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setWhat(int what) {
+        this.what = what;
     }
 
     public String getMsg() {
@@ -30,5 +38,17 @@ public class Message {
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    public Runnable getCallBack() {
+        return callBack;
+    }
+
+    void recycleUnchecked() {
+        target = null;
+        callBack = null;
+        next = null;
+        what = 0;
+        msg = null;
     }
 }

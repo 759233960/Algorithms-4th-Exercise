@@ -4,7 +4,7 @@ package other.my_handler;
  * Created by Yif on 6/30/2018.
  */
 public class Looper {
-    static final ThreadLocal<Looper> sThreadLocal = new ThreadLocal<>();
+    private static final ThreadLocal<Looper> sThreadLocal = new ThreadLocal<>();
     private static Looper sMainLooper;
     IMessageQueue messageQueue;
 
@@ -47,9 +47,17 @@ public class Looper {
                 e.printStackTrace();
             }
             if (message != null) {
-                message.target.handleMessage(message);
+                message.target.dispatchMessage(message);
             }
         }
+    }
+
+    public void quit() {
+        messageQueue.quit(false);
+    }
+
+    public void quitSafely() {
+        messageQueue.quit(true);
     }
 
 }
