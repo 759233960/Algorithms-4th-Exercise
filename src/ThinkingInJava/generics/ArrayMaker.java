@@ -16,6 +16,7 @@ public class ArrayMaker<T> {
         System.out.println(Arrays.toString(stringArray));
     }
 
+    @SuppressWarnings("unchecked")
     T[] create(int size) {
         return (T[]) Array.newInstance(kind, size);
     }
