@@ -140,7 +140,7 @@ class QuickSort3Way extends BaseSort {
     }
 
     private void sort(Comparable[] a, int lo, int hi) {
-        if (lo >= hi) return;
+        if (lo > hi) return;
         int lt = lo, i = lo + 1, gt = hi;
         Comparable v = a[lo];
         while (i <= gt) {
