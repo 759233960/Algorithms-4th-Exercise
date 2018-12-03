@@ -2,7 +2,7 @@ package ThinkingInJava.generics;
 
 public class CaptureConversion {
     static <T> void f1(Holder<T> holder) {
-        T t =holder.getValue();
+        T t =holder.get();
         System.out.println(t.getClass().getSimpleName());
     }
 
@@ -17,7 +17,7 @@ public class CaptureConversion {
         f1(str);
         f2(raw);
         Holder rawBasic = new Holder();
-        rawBasic.setValue(new Object());
+        rawBasic.set(new Object());
         f2(rawBasic);
         Holder<?> wildcarded = new Holder<>(1.0);
         f2(wildcarded);

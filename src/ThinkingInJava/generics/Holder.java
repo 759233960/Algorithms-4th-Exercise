@@ -12,21 +12,21 @@ public class Holder<T> {
 
     public static void main(String[] args) {
         Holder<Apple> appleHolder = new Holder<>(new Apple());
-        Apple d = appleHolder.getValue();
-        appleHolder.setValue(d);
+        Apple d = appleHolder.get();
+        appleHolder.set(d);
 //        Holder<Fruit> fruitHolder=appleHolder;
         Holder<? extends Fruit> fruit = appleHolder;
-        Fruit p = fruit.getValue();
-        d = (Apple) fruit.getValue();
+        Fruit p = fruit.get();
+        d = (Apple) fruit.get();
         System.out.println(fruit.equals(d));
-        Orange c = (Orange) fruit.getValue();
+        Orange c = (Orange) fruit.get();
     }
 
-    public T getValue() {
+    public T get() {
         return value;
     }
 
-    public void setValue(T value) {
+    public void set(T value) {
         this.value = value;
     }
 
