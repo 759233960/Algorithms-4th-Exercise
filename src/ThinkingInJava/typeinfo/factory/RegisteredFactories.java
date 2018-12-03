@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 class Part {
-    //Base list
+    //Base list contains factory implementation
     private static List<Factory<? extends Part>> partFactories = new ArrayList<>();
     private static Random rand = new Random(47);
 
