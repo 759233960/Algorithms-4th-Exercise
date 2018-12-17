@@ -113,7 +113,7 @@ class QuickSort extends BaseSort {
         if (lo >= hi) return;
         int j = partition(a, lo, hi);
         sort(a, lo, j - 1);
-        sort(a, lo, j + 1);
+        sort(a, j + 1, hi);
     }
 
     private int partition(Comparable[] a, int lo, int hi) {
